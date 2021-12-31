@@ -48,8 +48,9 @@ const Grid = ({ color }) => {
         return grid
     }
 
-    const renderInit = () => {
-        if (gridX && gridY) {
+    const renderInit = e => {        
+        e.preventDefault()
+        if (gridX >= 1 && gridY >= 1) {
             setWidth(gridX)
             const init = generateRandomGrid(gridY, gridX);
             setGridX('');
@@ -177,7 +178,6 @@ const Grid = ({ color }) => {
                         type="number"
                         min="1"
                         step='1'
-                        required
                         value={gridX}
                         onChange={(e) => setGridX(e.target.value)}
                     />
@@ -186,7 +186,6 @@ const Grid = ({ color }) => {
                         type="number"
                         min="1"
                         step='1'
-                        required
                         value={gridY}
                         onChange={(e) => setGridY(e.target.value)}
                     />

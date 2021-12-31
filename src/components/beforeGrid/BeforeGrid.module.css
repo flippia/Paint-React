@@ -1,0 +1,19 @@
+.before-grid{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem ;
+}
+
+.before-grid h3{
+    align-self: flex-start;
+}
+
+.before-grid table{
+    border-spacing: 0.2em;
+    border: none;
+}
+
+.before-grid td {
+    padding: 0.3rem 0.1rem;
+    font-size: 0.3rem;
+}

@@ -2,15 +2,18 @@ import styles from './Grid.module.css'
 
 import BeforeGrid from '../beforeGrid/BeforeGrid';
 
-import _ from 'lodash';
+import _, { camelCase } from 'lodash';
 import { useState, useEffect } from 'react';
 
 const Grid = ({ color }) => {
+    const [width, setWidth] = useState('')
     const [gridX, setGridX] = useState('')
     const [gridY, setGridY] = useState('')
     const [beforeGrid, setBeforeGrid] = useState(null)
     const [renderGrid, setRenderGrid] = useState(null)
     const [tempGrid, setTempGrid] = useState(null)
+
+    const [showContent, setShowContent] = useState(false)
 
     const [paintX, setPaintX] = useState(null)
     const [paintY, setPaintY] = useState(null)
@@ -47,6 +50,7 @@ const Grid = ({ color }) => {
 
     const renderInit = () => {
         if (gridX && gridY) {
+            setWidth(gridX)
             const init = generateRandomGrid(gridY, gridX);
             setGridX('');
             setGridY('');
@@ -187,7 +191,10 @@ const Grid = ({ color }) => {
                         onChange={(e) => setGridY(e.target.value)}
                     />
                 </div>
-                <button onClick={renderInit}>Render initial grid</button>
+                <div>
+                    <button onClick={renderInit}>Render initial grid</button>
+                    <button onClick={() => setShowContent(!showContent)} disabled={renderGrid ? false : true}>Toggle grid content</button>
+                </div>
                 {paintX && paintY ?
                     <div>Ready to start paint at {paintX},{paintY} ?</div>
                     :
@@ -198,7 +205,7 @@ const Grid = ({ color }) => {
                 >Start paint</button>
             </form>
             {renderGrid &&
-                <table>
+                <table style={{ width: `${600 / width}%` }}>
                     <tbody>
                         {renderGrid.map((row, rowIndex) => (
                             <tr key={rowIndex}>
@@ -209,14 +216,14 @@ const Grid = ({ color }) => {
                                         className={`td-${rowIndex + 1}-${colIndex + 1}`}
                                         onClick={selectStart}
                                     >
-                                        {rowIndex + 1}, {colIndex + 1}
+                                        {showContent ? `${rowIndex + 1}, ${colIndex + 1}` : ''}
                                     </td>
                                 ))}
                             </tr>
                         ))}
                     </tbody>
                 </table>}
-            {beforeGrid && <BeforeGrid beforegrid={beforeGrid} />}
+            {beforeGrid && <BeforeGrid beforegrid={beforeGrid} showContent={showContent} width={width} />}
         </div>
     );
 }

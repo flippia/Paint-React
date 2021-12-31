@@ -23,24 +23,25 @@ var COLORS = [
  */
 function floodFillAt(grid, x, y, color) {
   const originalColor = grid[x][y]
-  
+
+  // inner pixels
   let usedPixels = []
-  
+  // outer pixcels with the same color
   let curPixels = [`${x}-${y}`]
-  
+  // all outer pixels the algorithm applying to
   let newPixels = []
 
   const xMaxIndex = grid.length - 1
   const yMaxIndex = grid[0].length - 1
 
-  
+  // obtain the adjacent pixels(8 or less)
   const getAdjacentPixels = (pixelX, pixelY) => {
     const arr = [
       `${pixelX-1}-${pixelY-1}`, `${pixelX-1}-${pixelY}`, `${pixelX-1}-${pixelY+1}`,
       `${pixelX}-${pixelY-1}`, `${pixelX}-${pixelY+1}`,
       `${pixelX+1}-${pixelY-1}`, `${pixelX+1}-${pixelY}`, `${pixelX+1}-${pixelY+1}`
     ]
-    
+    // delete those pixcels on the edge
     if (pixelX === 0) {
       delete arr[0]
       delete arr[1]
@@ -61,22 +62,22 @@ function floodFillAt(grid, x, y, color) {
       delete arr[4]
       delete arr[7]
     }
-    return arr.filter(() => true) 
+    return arr.filter(() => true) // obtain the regular array instead of the having some null
   }
 
   do {
     const newPixelsSet = new Set()
-    
+    // obtain all the spread unique pixcels(including both inner and outer)
     curPixels.forEach(pixel => {
       const [pixelX, pixelY] = pixel.split('-')
       const adjacentPixels = getAdjacentPixels(+pixelX, +pixelY)
       adjacentPixels.forEach(item => newPixelsSet.add(item))
     })
-    
+    // reset the inner pixels
     usedPixels = [...usedPixels, ...curPixels]
-    
+    // obtain all the spread outer pixels
     newPixels = [...newPixelsSet].filter(pixel => !usedPixels.includes(pixel))
-    
+    // filter the outer pixels with the same color
     curPixels = newPixels.filter(pixel => {
       const [pixelX, pixelY] = pixel.split('-')
       return grid[pixelX][pixelY] === originalColor
@@ -87,6 +88,8 @@ function floodFillAt(grid, x, y, color) {
     const [pixelX, pixelY] = pixel.split('-')
     grid[pixelX][pixelY] = color
   })
+
+  return grid
 }
 
 exports.floodFillAt = floodFillAt

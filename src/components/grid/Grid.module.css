@@ -25,18 +25,25 @@
 }
 
 .grid form button{
-    width: 8rem;
-    margin: 0.5rem 0 0.5rem 0;
+    width: 10rem;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
     align-self: center;
 }
 
 .grid table{
-    border-spacing: 0.2em;
+    align-self: center;
+    border-spacing: 0.1em;
     border: none;
+    table-layout: fixed;
+}
+
+.grid tr{
+    height: 2.2rem;
 }
 
 .grid td{
-    padding: 0.3rem 0.1rem;
-    font-size: 0.7rem;
+    /* padding: 0.3rem 0.1rem; */
+    font-size: 0.5rem;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
 }

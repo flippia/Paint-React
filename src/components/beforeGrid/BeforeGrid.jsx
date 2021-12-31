@@ -1,10 +1,10 @@
 import styles from './BeforeGrid.module.css'
 
-const beforeGrid = ({ beforegrid }) => {
+const beforeGrid = ({ beforegrid,showContent,width }) => {
     return (
         <div className={styles['before-grid']}>
             <h3>Original:</h3>
-            <table >
+            <table style={{ width: `${600 / width}%` }}>
                 <tbody>
                     {beforegrid.map((row, rowIndex) => (
                         <tr key={rowIndex}>
@@ -14,7 +14,7 @@ const beforeGrid = ({ beforegrid }) => {
                                     style={{ background: cell }}
                                     className={`td-${rowIndex + 1}-${colIndex + 1}`}
                                 >
-                                    {rowIndex + 1}, {colIndex + 1}
+                                    {showContent ? `${rowIndex + 1}, ${colIndex + 1}` : ''}
                                 </td>
                             ))}
                         </tr>

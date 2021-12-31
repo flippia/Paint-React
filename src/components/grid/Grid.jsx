@@ -205,7 +205,7 @@ const Grid = ({ color }) => {
                 >Start paint</button>
             </form>
             {renderGrid &&
-                <table style={{ width: `${600 / width}%` }}>
+                <table style={{ width: `${2.2 * width}rem` }}>
                     <tbody>
                         {renderGrid.map((row, rowIndex) => (
                             <tr key={rowIndex}>

@@ -21,7 +21,7 @@ var COLORS = [
  * @param {string} color New color to fill with using the flood algorithm, will be one of the COLORS
  * @returns {[][]string} Grid array with the implemented flood fill algorithm
  */
-function floodFillAt(grid, x, y, color) {
+function floodFillAt(grid, y, x, color) {
   const originalColor = grid[x][y]
 
   // inner pixels

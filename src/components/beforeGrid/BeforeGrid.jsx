@@ -3,7 +3,7 @@ import styles from './BeforeGrid.module.css'
 const beforeGrid = ({ beforegrid,showContent,width }) => {
     return (
         <div className={styles['before-grid']}>
-            <h3>Original:</h3>
+            <h3>Before:</h3>
             <table style={{ width: `${2.2 * width}rem` }}>
                 <tbody>
                     {beforegrid.map((row, rowIndex) => (
